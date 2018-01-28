@@ -21,6 +21,8 @@ const nonTreeShakableModules = [
     'es6-shim',
     'event-source-polyfill',
     'jquery',
+    'moment',
+    'ngx-bootstrap'
 ];
 const allModules = treeShakableModules.concat(nonTreeShakableModules);
 
