@@ -9,6 +9,7 @@ using Microsoft.AspNetCore.SpaServices.Webpack;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Swashbuckle.AspNetCore.Swagger;
 
 namespace ContactManager
 {
@@ -24,10 +25,20 @@ namespace ContactManager
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddMvc();
-
             string conString = Configuration["LocalContextString"];
             services.AddDbContext<ContactContext>(options => options.UseSqlServer(conString));
+
+            services.AddMvc();
+
+            services.AddSwaggerGen(c =>
+            {
+                c.SwaggerDoc("v1", new Info {
+                    Title = "Contact API",
+                    Version = "v1",
+                    TermsOfService = "None",
+                    Description = "A simple API for Contacts, both Supplier and Customer"
+                });
+            });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -45,6 +56,13 @@ namespace ContactManager
             {
                 app.UseExceptionHandler("/Home/Error");
             }
+
+            app.UseSwagger();
+
+            app.UseSwaggerUI(c =>
+            {
+                c.SwaggerEndpoint("/swagger/v1/swagger.json", "Contact API V1");
+            });
 
             app.UseStaticFiles();
 
