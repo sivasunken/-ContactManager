@@ -1,2 +1,2 @@
-# -ContactManager
+# ContactManager
 Contact Manager Solution
