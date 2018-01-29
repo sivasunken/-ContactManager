@@ -91,6 +91,15 @@ namespace ContactManager.Controllers
                 return BadRequest(ModelState);
             }
 
+            try
+            {
+                customer.ID = customer.Name.ID = _context.Customers.Select(per => per.ID).Max() + 1L;
+            }
+            catch
+            {
+                customer.ID = customer.Name.ID = 0;
+            }
+
             _context.Customers.Add(customer);
             await _context.SaveChangesAsync();
 

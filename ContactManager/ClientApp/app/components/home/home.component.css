@@ -1,0 +1,16 @@
+﻿.deletered {
+    color: red;
+}
+
+.transbg {
+    background-color: transparent;
+}
+
+.headerFontSize {
+    font-size: 30px;
+}
+
+.addButton {
+    margin: 5px;
+    vertical-align: middle;
+}

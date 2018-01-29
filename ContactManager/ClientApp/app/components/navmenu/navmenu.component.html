@@ -14,7 +14,12 @@
             <ul class='nav navbar-nav'>
                 <li [routerLinkActive]="['link-active']">
                     <a [routerLink]="['/home']">
-                        <span class='glyphicon glyphicon-home'></span> Home
+                        <span class='glyphicon glyphicon-home'></span> Summary
+                    </a>
+                </li>
+                <li [routerLinkActive]="['link-active']">
+                    <a [routerLink]="['/contact']">
+                        <span class='glyphicon glyphicon-plus-sign'></span> Add Contact
                     </a>
                 </li>
             </ul>

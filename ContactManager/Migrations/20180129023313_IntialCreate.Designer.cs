@@ -11,8 +11,8 @@ using System;
 namespace ContactManager.Migrations
 {
     [DbContext(typeof(ContactContext))]
-    [Migration("20180128190011_InitialCreate")]
-    partial class InitialCreate
+    [Migration("20180129023313_IntialCreate")]
+    partial class IntialCreate
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -30,7 +30,7 @@ namespace ContactManager.Migrations
 
                     b.Property<string>("Email");
 
-                    b.Property<int?>("NameID");
+                    b.Property<long?>("NameID");
 
                     b.HasKey("ID");
 
@@ -41,7 +41,7 @@ namespace ContactManager.Migrations
 
             modelBuilder.Entity("ContactManager.Model.Name", b =>
                 {
-                    b.Property<int>("ID")
+                    b.Property<long>("ID")
                         .ValueGeneratedOnAdd();
 
                     b.Property<string>("First");
@@ -58,7 +58,7 @@ namespace ContactManager.Migrations
                     b.Property<long>("ID")
                         .ValueGeneratedOnAdd();
 
-                    b.Property<int?>("NameID");
+                    b.Property<long?>("NameID");
 
                     b.Property<string>("Telephone");
 

@@ -1,0 +1,61 @@
+﻿<div class="container-fluid">
+    <div class="row">
+        <h1>Customer</h1>
+        <hr />
+    </div>
+    <div class="row">
+        <form #contactForm="ngForm" (ngSubmit)="onSubmit()" nameValidator>
+            <div class="row form-group" ngModelGroup="name">
+                <div class="col-sm-6 mb-3">
+                    <label for="first">First name</label>
+                    <input type="text" class="form-control" id="first" name="first" #first="ngModel" [(ngModel)]="contact.name.first" required>
+                    <alert type="danger" *ngIf="first.invalid && (first.dirty || first.touched)">
+                        Valid first name is required.
+                    </alert>
+                </div>
+                <div class="col-sm-6 mb-3">
+                    <label for="last">Last name</label>
+                    <input type="text" class="form-control" id="last" name="last" #last="ngModel" [(ngModel)]="contact.name.last" required>
+                    <alert type="danger" *ngIf="last.invalid && (last.dirty || last.touched)">
+                        Valid last name is required.
+                    </alert>
+                </div>
+            </div>
+            <div class="mb-3">
+                <div class="custom-control custom-radio radio-inline">
+                    <input id="customer" name="contactType" type="radio" class="custom-control-input" #contactType="ngModel" [(ngModel)]="contactTypes" [value]="'customer'">
+                    <label class="custom-control-label" for="customer">Customer</label>
+                </div>
+                <div class="custom-control custom-radio radio-inline">
+                    <input id="supplier" name="contactType" type="radio" class="custom-control-input" #contactType="ngModel" [(ngModel)]="contactTypes" [value]="'supplier'">
+                    <label class="custom-control-label" for="supplier">Supplier</label>
+                </div>
+            </div>
+            <div *ngIf="contactTypes == 'customer'">
+                <div class="mb-3">
+                    <label for="birthday">Birthday</label>
+                    <input type="text" class="form-control" id="birthday" name="birthday" [(ngModel)]="contact.birthday">
+                </div>
+                <div class="mb-3">
+                    <label for="email">Email</label>
+                    <input type="email" class="form-control" id="email" name="email" placeholder="you@example.com" [(ngModel)]="contact.email" required emailValidator>
+                    <alert type="danger" *ngIf="email.invalid && (email.dirty || email.touched)">
+                        Please enter a valid email address.
+                    </alert>
+                </div>
+            </div>
+            <div *ngIf="contactTypes == 'supplier'">
+                <div class="mb-3">
+                    <label for="telephone">Telephone</label>
+                    <input type="tel" class="form-control" id="telephone" name="telephone" [(ngModel)]="contact.telephone" required>
+                    <alert type="danger" *ngIf="telephone.invalid && (telephone.dirty || telephone.touched)">
+                        Please enter a valid telephone number between 7 and 12 numbers.
+                    </alert>
+                </div>
+            </div>
+            <hr />
+            <button class="btn btn-primary btn-lg btn-block" type="submit" [disabled]="!contactForm.form.valid">Submit</button>
+            <alert [attr.type]="errorType" [dismissible]="true" *ngIf="msg">{{msg}}</alert>
+        </form>
+    </div>
+</div>

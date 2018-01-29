@@ -26,6 +26,25 @@
     <Content Remove="ClientApp\**" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Compile Remove="Migrations\20180129023002_InitialCreate.cs" />
+    <Compile Remove="Migrations\20180129023002_InitialCreate.Designer.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Remove="ClientApp\app\components\model\contact.model.ts" />
+    <None Remove="ClientApp\app\components\shared\email-validator.directive.ts" />
+    <None Remove="ClientApp\app\components\shared\name-validator.directive.ts" />
+    <None Remove="ClientApp\app\components\shared\telephone-validator.directive.ts" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <TypeScriptCompile Include="ClientApp\app\components\model\contact.model.ts" />
+    <TypeScriptCompile Include="ClientApp\app\components\shared\email-validator.directive.ts" />
+    <TypeScriptCompile Include="ClientApp\app\components\shared\name-validator.directive.ts" />
+    <TypeScriptCompile Include="ClientApp\app\components\shared\telephone-validator.directive.ts" />
+  </ItemGroup>
+
   <Target Name="DebugRunWebpack" BeforeTargets="Build" Condition=" '$(Configuration)' == 'Debug' And !Exists('wwwroot\dist') ">
     <!-- Ensure Node.js is installed -->
     <Exec Command="node --version" ContinueOnError="true">

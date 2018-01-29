@@ -5,7 +5,7 @@ using System.Collections.Generic;
 
 namespace ContactManager.Migrations
 {
-    public partial class InitialCreate : Migration
+    public partial class IntialCreate : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -13,7 +13,7 @@ namespace ContactManager.Migrations
                 name: "Name",
                 columns: table => new
                 {
-                    ID = table.Column<int>(nullable: false)
+                    ID = table.Column<long>(nullable: false)
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
                     First = table.Column<string>(nullable: true),
                     Last = table.Column<string>(nullable: true)
@@ -31,7 +31,7 @@ namespace ContactManager.Migrations
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
                     Birthday = table.Column<DateTime>(nullable: true),
                     Email = table.Column<string>(nullable: true),
-                    NameID = table.Column<int>(nullable: true)
+                    NameID = table.Column<long>(nullable: true)
                 },
                 constraints: table =>
                 {
@@ -50,7 +50,7 @@ namespace ContactManager.Migrations
                 {
                     ID = table.Column<long>(nullable: false)
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
-                    NameID = table.Column<int>(nullable: true),
+                    NameID = table.Column<long>(nullable: true),
                     Telephone = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
