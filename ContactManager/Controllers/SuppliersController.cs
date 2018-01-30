@@ -25,7 +25,7 @@ namespace ContactManager.Controllers
         [HttpGet]
         public IEnumerable<Supplier> GetSuppliers()
         {
-            return _context.Suppliers;
+            return _context.Suppliers.ToList();
         }
 
         // GET: api/suppliers/5

@@ -14,11 +14,6 @@ namespace ContactManager.Context
 
         public DbSet<Customer> Customers { get; set; }
         public DbSet<Supplier> Suppliers { get; set; }
-
-        protected override void OnModelCreating(ModelBuilder modelBuilder)
-        {
-            modelBuilder.Entity<Customer>().ToTable("Customer");
-            modelBuilder.Entity<Supplier>().ToTable("Supplier");
-        }
+        public DbSet<Name> Names { get; set; }
     }
 }

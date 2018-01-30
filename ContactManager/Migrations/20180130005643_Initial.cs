@@ -5,26 +5,26 @@ using System.Collections.Generic;
 
 namespace ContactManager.Migrations
 {
-    public partial class IntialCreate : Migration
+    public partial class Initial : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.CreateTable(
-                name: "Name",
+                name: "Names",
                 columns: table => new
                 {
-                    ID = table.Column<long>(nullable: false)
+                    NameID = table.Column<long>(nullable: false)
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
                     First = table.Column<string>(nullable: true),
                     Last = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Name", x => x.ID);
+                    table.PrimaryKey("PK_Names", x => x.NameID);
                 });
 
             migrationBuilder.CreateTable(
-                name: "Customer",
+                name: "Customers",
                 columns: table => new
                 {
                     ID = table.Column<long>(nullable: false)
@@ -35,17 +35,17 @@ namespace ContactManager.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Customer", x => x.ID);
+                    table.PrimaryKey("PK_Customers", x => x.ID);
                     table.ForeignKey(
-                        name: "FK_Customer_Name_NameID",
+                        name: "FK_Customers_Names_NameID",
                         column: x => x.NameID,
-                        principalTable: "Name",
-                        principalColumn: "ID",
+                        principalTable: "Names",
+                        principalColumn: "NameID",
                         onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.CreateTable(
-                name: "Supplier",
+                name: "Suppliers",
                 columns: table => new
                 {
                     ID = table.Column<long>(nullable: false)
@@ -55,36 +55,36 @@ namespace ContactManager.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Supplier", x => x.ID);
+                    table.PrimaryKey("PK_Suppliers", x => x.ID);
                     table.ForeignKey(
-                        name: "FK_Supplier_Name_NameID",
+                        name: "FK_Suppliers_Names_NameID",
                         column: x => x.NameID,
-                        principalTable: "Name",
-                        principalColumn: "ID",
+                        principalTable: "Names",
+                        principalColumn: "NameID",
                         onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.CreateIndex(
-                name: "IX_Customer_NameID",
-                table: "Customer",
+                name: "IX_Customers_NameID",
+                table: "Customers",
                 column: "NameID");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Supplier_NameID",
-                table: "Supplier",
+                name: "IX_Suppliers_NameID",
+                table: "Suppliers",
                 column: "NameID");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "Customer");
+                name: "Customers");
 
             migrationBuilder.DropTable(
-                name: "Supplier");
+                name: "Suppliers");
 
             migrationBuilder.DropTable(
-                name: "Name");
+                name: "Names");
         }
     }
 }

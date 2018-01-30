@@ -3,6 +3,7 @@ import { Contact } from '../model/contact.model';
 import { ContactService } from '../services/contact.service';
 import { Router, ActivatedRoute, ParamMap } from '@angular/router';
 import { NgForm } from '@angular/forms';
+import { BsDatepickerConfig } from 'ngx-bootstrap/datepicker';
 
 @Component({
     selector: 'customer',
@@ -14,18 +15,22 @@ export class CustomerComponent implements OnInit {
     contactTypes: string;
     msg: string;
     errorType: string;
-    isEdit: boolean;
+    isEdit: boolean = false;
+    bsConfig: BsDatepickerConfig;
 
     constructor(
         private contactService: ContactService,
         private router: Router,
         private route: ActivatedRoute
     ) {
-
+        this.bsConfig = new BsDatepickerConfig();
+        this.bsConfig.containerClass = 'theme-default';
+        this.bsConfig.maxDate = new Date();
     }
 
     ngOnInit(): void {
         if (this.route.snapshot.url.length > 0 && this.route.snapshot.url[0].path.includes('contact')) {
+            this.contact = new Contact();
             this.contactTypes = 'customer';
             this.isEdit = false;
         }
@@ -39,15 +44,70 @@ export class CustomerComponent implements OnInit {
                     break;
                 default:
                     this.router.navigate(['/home']);
+                    break;
             }
         }
     }
 
     loadContact(id: number) {
-
+        switch (this.contactTypes) {
+            case 'customer':
+                this.contactService.getCustomer(id)
+                    .subscribe(resp => {
+                        this.contact = resp;
+                    }, error => {
+                        alert("Error: " + error);
+                    });
+                break;
+            case 'supplier':
+                this.contactService.getSupplier(id)
+                    .subscribe(resp => {
+                        this.contact = resp;
+                    }, error => {
+                        alert("Error: " + error);
+                    });
+                break;
+            default:
+                break;
+        }
     }
 
-    onSubmit(form: NgForm) {
-        
+    onSubmit() {
+        switch (this.contactTypes) {
+            case 'customer':
+                if (this.isEdit)
+                    this.contactService.putCustomer(this.contact)
+                        .subscribe(resp => {
+                            this.router.navigate(['/home']);
+                        }, error => {
+                            alert("Error: " + error);
+                        });
+                else
+                    this.contactService.postCustomer(this.contact)
+                        .subscribe(resp => {
+                            this.router.navigate(['/home']);
+                        }, error => {
+                            alert("Error: " + error);
+                        });
+                break;
+            case 'supplier':
+                if (this.isEdit)
+                    this.contactService.putSupplier(this.contact)
+                        .subscribe(resp => {
+                            this.router.navigate(['/home']);
+                        }, error => {
+                            alert("Error: " + error);
+                        });
+                else
+                    this.contactService.postSupplier(this.contact)
+                        .subscribe(resp => {
+                            this.router.navigate(['/home']);
+                        }, error => {
+                            alert("Error: " + error);
+                        });
+                break;
+            default:
+                break;
+        }
     }
 }

@@ -32,7 +32,8 @@ namespace ContactManager
 
             services.AddSwaggerGen(c =>
             {
-                c.SwaggerDoc("v1", new Info {
+                c.SwaggerDoc("v1", new Info
+                {
                     Title = "Contact API",
                     Version = "v1",
                     TermsOfService = "None",
@@ -56,6 +57,12 @@ namespace ContactManager
             {
                 app.UseExceptionHandler("/Home/Error");
             }
+
+            //app.UseCors(builder =>
+            //{
+            //    builder.WithOrigins("http://localhost:50477")
+            //    .AllowAnyHeader();
+            //});
 
             app.UseSwagger();
 

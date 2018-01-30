@@ -35,21 +35,21 @@ namespace ContactManager.Migrations
 
                     b.HasIndex("NameID");
 
-                    b.ToTable("Customer");
+                    b.ToTable("Customers");
                 });
 
             modelBuilder.Entity("ContactManager.Model.Name", b =>
                 {
-                    b.Property<long>("ID")
+                    b.Property<long>("NameID")
                         .ValueGeneratedOnAdd();
 
                     b.Property<string>("First");
 
                     b.Property<string>("Last");
 
-                    b.HasKey("ID");
+                    b.HasKey("NameID");
 
-                    b.ToTable("Name");
+                    b.ToTable("Names");
                 });
 
             modelBuilder.Entity("ContactManager.Model.Supplier", b =>
@@ -65,7 +65,7 @@ namespace ContactManager.Migrations
 
                     b.HasIndex("NameID");
 
-                    b.ToTable("Supplier");
+                    b.ToTable("Suppliers");
                 });
 
             modelBuilder.Entity("ContactManager.Model.Customer", b =>

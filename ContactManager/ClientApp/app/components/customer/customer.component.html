@@ -21,7 +21,7 @@
                     </alert>
                 </div>
             </div>
-            <div class="mb-3">
+            <div class="mb-3" *ngIf="!isEdit">
                 <div class="custom-control custom-radio radio-inline">
                     <input id="customer" name="contactType" type="radio" class="custom-control-input" #contactType="ngModel" [(ngModel)]="contactTypes" [value]="'customer'">
                     <label class="custom-control-label" for="customer">Customer</label>
@@ -34,11 +34,11 @@
             <div *ngIf="contactTypes == 'customer'">
                 <div class="mb-3">
                     <label for="birthday">Birthday</label>
-                    <input type="text" class="form-control" id="birthday" name="birthday" [(ngModel)]="contact.birthday">
+                    <input type="text" class="form-control" id="birthday" name="birthday" [(ngModel)]="contact.birthday" #dp="bsDatepicker" bsDatepicker [(bsValue)]="bsValue" [bsConfig]="bsConfig">
                 </div>
                 <div class="mb-3">
                     <label for="email">Email</label>
-                    <input type="email" class="form-control" id="email" name="email" placeholder="you@example.com" [(ngModel)]="contact.email" required emailValidator>
+                    <input type="email" class="form-control" id="email" name="email" placeholder="you@example.com" #email="ngModel" [(ngModel)]="contact.email" required emailValidator>
                     <alert type="danger" *ngIf="email.invalid && (email.dirty || email.touched)">
                         Please enter a valid email address.
                     </alert>
@@ -47,7 +47,7 @@
             <div *ngIf="contactTypes == 'supplier'">
                 <div class="mb-3">
                     <label for="telephone">Telephone</label>
-                    <input type="tel" class="form-control" id="telephone" name="telephone" [(ngModel)]="contact.telephone" required>
+                    <input type="tel" class="form-control" id="telephone" name="telephone" [(ngModel)]="contact.telephone" #telephone="ngModel" required telephoneValidator>
                     <alert type="danger" *ngIf="telephone.invalid && (telephone.dirty || telephone.touched)">
                         Please enter a valid telephone number between 7 and 12 numbers.
                     </alert>
@@ -55,7 +55,6 @@
             </div>
             <hr />
             <button class="btn btn-primary btn-lg btn-block" type="submit" [disabled]="!contactForm.form.valid">Submit</button>
-            <alert [attr.type]="errorType" [dismissible]="true" *ngIf="msg">{{msg}}</alert>
         </form>
     </div>
 </div>

@@ -18,13 +18,31 @@ export class HomeComponent implements OnInit{
     }
 
     loadData() {
-        this.contactService.getCustomers().take(1)
+        this.contactService.getCustomers()
             .subscribe(resp => {
                 this.customers = resp;
             });
-        this.contactService.getSuppliers().take(1)
+        this.contactService.getSuppliers()
             .subscribe(resp => {
                 this.suppliers = resp;
             });
+    }
+
+    onDeleteCustomerClick(customer: Contact) {
+        this.contactService.deleteCustomer(customer.id)
+            .subscribe(resp => {
+                this.loadData();
+            }, error => {
+                alert("Error: " + error);
+            });
+    }
+
+    onDeleteSupplierClick(supplier: Contact) {
+        this.contactService.deleteSupplier(supplier.id)
+            .subscribe(res=>{
+                this.loadData();
+            }, error => {
+                alert("Error: " + error);
+            })
     }
 }

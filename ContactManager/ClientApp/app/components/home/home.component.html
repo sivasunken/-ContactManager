@@ -17,16 +17,16 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <tr>
+                        <tr *ngFor="let customer of customers">
                             <td>
                                 <div class="btn-group" role="group" aria-label="Icons">
-                                    <button type="button" class="btn btn-secondary transbg"><span class="glyphicon glyphicon-edit"></span></button>
-                                    <button type="button" class="btn btn-secondary transbg"><span class="glyphicon glyphicon-minus deletered"></span></button>
+                                    <button type="button" class="btn btn-secondary transbg" [routerLink]="['/customer',customer.id]"><span class="glyphicon glyphicon-edit"></span></button>
+                                    <button type="button" class="btn btn-secondary transbg" (click)="onDeleteCustomerClick(customer)"><span class="glyphicon glyphicon-minus deletered"></span></button>
                                 </div>
                             </td>
-                            <td>Sample</td>
-                            <td></td>
-                            <td>sample@example.com</td>
+                            <td>{{customer?.name?.first}} {{customer?.name?.last}}</td>
+                            <td>{{customer.birthday | date:'dd/MM/YYYY'}}</td>
+                            <td>{{customer.email}}</td>
                         </tr>
                     </tbody>
                 </table>
@@ -48,15 +48,15 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <tr>
+                        <tr *ngFor="let supplier of suppliers">
                             <td>
                                 <div class="btn-group" role="group" aria-label="Icons">
-                                    <button type="button" class="btn btn-secondary transbg"><span class="glyphicon glyphicon-edit"></span></button>
-                                    <button type="button" class="btn btn-secondary transbg"><span class="glyphicon glyphicon-minus deletered"></span></button>
+                                    <button type="button" class="btn btn-secondary transbg" [routerLink]="['/supplier',supplier.id]"><span class="glyphicon glyphicon-edit"></span></button>
+                                    <button type="button" class="btn btn-secondary transbg" (click)="onDeleteSupplierClick(supplier)"><span class="glyphicon glyphicon-minus deletered"></span></button>
                                 </div>
                             </td>
-                            <td>Sample</td>
-                            <td>4379873000</td>
+                            <td>{{supplier?.name?.first}} {{supplier?.name?.last}}</td>
+                            <td>{{supplier.telephone}}</td>
                         </tr>
                     </tbody>
                 </table>

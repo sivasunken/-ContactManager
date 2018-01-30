@@ -5,6 +5,7 @@
 }
 
 export class Contact {
+    id: number;
     birthday: string;
     email: string;
     telephone: string;

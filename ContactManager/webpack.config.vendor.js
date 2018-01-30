@@ -23,6 +23,7 @@ const nonTreeShakableModules = [
     'jquery',
     'moment',
     'ngx-bootstrap',
+    'ngx-bootstrap/datepicker/bs-datepicker.css',
     'email-validator'
 ];
 const allModules = treeShakableModules.concat(nonTreeShakableModules);

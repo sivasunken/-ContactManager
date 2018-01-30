@@ -25,7 +25,7 @@ namespace ContactManager.Controllers
         [HttpGet]
         public IEnumerable<Customer> GetCustomers()
         {
-            return _context.Customers;
+            return _context.Customers.ToList();
         }
 
         // GET: api/customers/5
@@ -89,15 +89,6 @@ namespace ContactManager.Controllers
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
-            }
-
-            try
-            {
-                customer.ID = customer.Name.ID = _context.Customers.Select(per => per.ID).Max() + 1L;
-            }
-            catch
-            {
-                customer.ID = customer.Name.ID = 0;
             }
 
             _context.Customers.Add(customer);
